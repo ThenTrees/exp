@@ -1,20 +1,20 @@
 # Tổng Quan Về Event-Driven Architecture
-1. Giới thiệu
+1. Giới thiệu  
    - Event-Driven Architecture (EDA) là một kiến trúc phần mềm mà các thành phần của hệ thống giao tiếp với nhau thông qua các sự kiện.(sản xuất và tiêu thụ)
    - Các sự kiện này có thể là bất kỳ hành động nào trong hệ thống như tạo, cập nhật hoặc xóa dữ liệu.
-2. Kiến trúc EDA 
-  2.1 Thành phần chính
+2. Kiến trúc EDA.  
+  2.1 Thành phần chính.  
    - Event Producer: Tạo ra sự kiện và gửi nó đến một hoặc nhiều Event Consumer.
     *example:* Khi một người dùng tạo một bài viết trên blog, hệ thống sẽ tạo một sự kiện `PostCreated` và gửi nó đến các Event Consumer như `Notification Service` để thông báo cho người dùng khác.
    - Event Consumer: Nhận sự kiện và xử lý nó.
     *example:* `Notification Service` nhận sự kiện `PostCreated` và sau đó gửi thông báo đến người dùng khác.
    - Event Broker: Là nơi lưu trữ sự kiện và phân phối chúng đến các Event Consumer.
-    *example:* `Kafka`, `RabbitMQ`, `AWS SNS`, `Google Pub/Sub`.v
-  2.2 Qui trình hoạt động
+    *example:* `Kafka`, `RabbitMQ`, `AWS SNS`, `Google Pub/Sub`.  
+  2.2 Qui trình hoạt động.
    - Event Producer tạo ra sự kiện và gửi nó đến Event Broker.
    - Event Broker lưu trữ sự kiện và phân phối chúng đến các Event Consumer.
-   - Event Consumer nhận sự kiện và xử lý nó.
-     (ERA)[https://images.viblo.asia/d32e8d31-480b-46c7-aab3-b1e85d83f71c.png]
+   - Event Consumer nhận sự kiện và xử lý nó.  
+   ![ERA](https://images.viblo.asia/d32e8d31-480b-46c7-aab3-b1e85d83f71c.png)
 3. Các mô hình triển khai
    - Point-to-Point: Một Event Producer gửi sự kiện đến một Event Consumer.
    - Publish/Subscribe: Một Event Producer gửi sự kiện đến một Event Broker và nhiều Event Consumer đăng ký nhận sự kiện đó.
