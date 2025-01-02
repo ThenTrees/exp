@@ -18,7 +18,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092 # This is the host:port that other brokers will use to communicate with this broker
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092 # This is the host:port that other brokers will use to communicate with this broker
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 # This is the replication factor for the __consumer_offsets topic
@@ -33,7 +33,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9093 # This is the host:port that other brokers will use to communicate with this broker
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9093 # This is the host:port that other brokers will use to communicate with this broker
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 # This is the replication factor for the __consumer_offsets topic
@@ -48,7 +48,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9094 # This is the host:port that other brokers will use to communicate with this broker
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9094 # This is the host:port that other brokers will use to communicate with this broker
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 # This is the replication factor for the __consumer_offsets topic
