@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+#kafka server url
+spring:
+  datasource:
+    url: jdbc:h2:mem:kafka
+  kafka:
+    bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: -1
+      retries: 1
+      properties:
+        [enable.idempotence]: true
+        [max.in.flight.requests.per.connection]: 5
+#0: no wait for kafka response
+#1: leader write success, not wait for follower
+#-1: wait for all leader, and  replication
+
+#privent duplicate send
