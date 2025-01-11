@@ -40,3 +40,4 @@
   - **Event Bus:** Service A gửi event đến event bus, service B lắng nghe event bus và nhận event từ đó. (1 event có thể được nhiều service tiêu thụ đồng thời).
 ![message queue](https://images.viblo.asia/562f9b20-4123-407e-bbba-79cc53ca2707.png)
 
+
