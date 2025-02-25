@@ -1,0 +1,68 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: git, vault
+  cloud:
+    bus:
+      refresh:
+        enabled: true
+    vault:
+      uri: http://localhost:8200
+      token: ${TOKEN_VAULT}
+    config:
+      server:
+        vault:
+          host: 127.0.0.1
+          port: 8200
+          scheme: http
+          backend: secret
+          default-key: application
+        #    config:
+        #      server:
+        #        native:
+        #          search-locations: file:///D:/scb/report/environment
+        git:
+          #          uri: https://github.com/ThenTrees/demo-config.git
+          uri: git@github.com:ThenTrees/demo-config.git
+          #          username:  thentrees
+          #          password: 280903Aa
+          clone-on-start: true
+          timeout: 5
+          private-key: ${ssh-private-key}
+          default-label: main
+        #          skip-ssl-validation: true
+  #  config:
+  #    import:
+  #      # Import c?c secrets t? nhi?u Secret Engines
+#        - vault://secret/token_github # Secrets t? KV Engine "secret/"
+#        - vault://spring-server-config/ssh-private-key # Secrets t? KV Engine "spring-server-config/"
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  retry:
+    initial-interval: 1000 # tgian cho lan thu nhat
+    max-attempts: 3 # thu lai 3 lan
+    multiplier: 1.5 # tang len 1.5 lan
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, bus-refresh, health, info, env, metrics, loggers
+logging:
+  level:
+    org.springframework.cloud.config: debug
+
+
+
+
+
+
+

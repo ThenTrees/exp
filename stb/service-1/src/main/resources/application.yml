@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: service-1
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    bus:
+      refresh:
+        enabled: true
+server:
+  port: 8081
+
+management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"

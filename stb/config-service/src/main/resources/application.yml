@@ -1,0 +1,36 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    bus:
+      refresh:
+        enabled: true
+    config:
+      server:
+        git:
+          uri: git@github.com:ThenTrees/demo-config.git
+          private-key: ${SSH_KEY}
+          default-label: main
+          force-pull: true
+          clone-on-start: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+jasypt:
+  encryptor:
+    password: hello
