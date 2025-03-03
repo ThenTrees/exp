@@ -1,20 +1,28 @@
 package com.thentrees.orderservice.controller;
 
 import com.thentrees.orderservice.dtos.request.OrderRequest;
+import com.thentrees.orderservice.entities.Order;
+import com.thentrees.orderservice.repository.OrderRepository;
+import com.thentrees.orderservice.utils.VaultEncryptConverter;
 import com.thentrees.orderservice.workflow.OrderWorkflow;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 @RequestMapping("/order")
 @RequiredArgsConstructor
 public class OrderController {
 
     private final WorkflowClient workflowClient;
+    private final OrderRepository orderRepository;
+    private final VaultEncryptConverter vaultTransit;
 
     @PostMapping
     public ResponseEntity<String> createOrder(@RequestBody OrderRequest request) {
@@ -38,7 +46,7 @@ public class OrderController {
                 OrderWorkflow.class,"ORDER"
         );
         // Chạy workflow bất đồng bộ
-        workflow.completeOrder(orderId);
+        workflow.setCompleteOrder(orderId);
         return ResponseEntity.ok("Order is being completed.");
     }
 
@@ -49,7 +57,7 @@ public class OrderController {
                 OrderWorkflow.class,"ORDER"
         );
         // Chạy workflow bất đồng bộ
-        workflow.cancelOrder(orderId);
+        workflow.setCancelOrder(orderId);
         return ResponseEntity.ok("Order is being cancelled");
     }
 
@@ -60,7 +68,7 @@ public class OrderController {
                 OrderWorkflow.class,"ORDER"
         );
         // Chạy workflow bất đồng bộ
-        workflow.deliverOrder(orderId);
+        workflow.setDeliverOrder(orderId);
         return ResponseEntity.ok("Order delivery is being processed");
     }
 
@@ -71,8 +79,29 @@ public class OrderController {
                 OrderWorkflow.class,"ORDER"
         );
         // Chạy workflow bất đồng bộ
-        workflow.processingOrder(orderId);
+        workflow.setProcessingOrder(orderId);
         return ResponseEntity.ok("Order is being processed, wait for delivery");
+    }
+
+    @PostMapping("/insert-order")
+    public ResponseEntity<String> insertOrder(@RequestBody OrderRequest request) {
+
+        log.info("Card number controller: " + request.getCardNumber());
+
+        Order order = Order.builder()
+                .cardNumber(request.getCardNumber())
+                .nameCustomer(request.getNameCustomer())
+                .productId(request.getProductId())
+                .quantity(request.getQuantity())
+                .build();
+
+        orderRepository.save(order);
+        return ResponseEntity.ok("Order is being inserted");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Order>> getOrder() {
+        return ResponseEntity.ok(orderRepository.findAll());
     }
 
 

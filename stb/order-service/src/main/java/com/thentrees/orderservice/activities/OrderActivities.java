@@ -7,14 +7,14 @@ import io.temporal.activity.ActivityMethod;
 public interface OrderActivities {
 
     @ActivityMethod
-    void processPayment(String orderId);
+    void processPayment(Long orderId);
 
     @ActivityMethod
     void checkInventory(String productId, int quantity);
 
     @ActivityMethod
-    void shipOrder(String orderId);
+    void shipOrder(Long orderId);
 
     @ActivityMethod
-    void sendNotification(String orderId, String message);
+    void sendNotification(Long orderId, String message);
 }

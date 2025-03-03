@@ -12,17 +12,19 @@ public interface OrderWorkflow {
     @WorkflowMethod
     void processOrder(OrderRequest request);
 
-    @SignalMethod
-    void cancelOrder(String orderId);
+    //
 
     @SignalMethod
-    void completeOrder(String orderId);
+    void setCancelOrder(String orderId);
 
     @SignalMethod
-    void deliverOrder(String orderId);
+    void setCompleteOrder(String orderId);
 
     @SignalMethod
-    void processingOrder(String orderId);
+    void setDeliverOrder(String orderId);
+
+    @SignalMethod
+    void setProcessingOrder(String orderId);
 
     @QueryMethod
     String getOrderStatus();

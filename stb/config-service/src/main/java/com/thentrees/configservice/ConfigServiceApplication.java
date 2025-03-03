@@ -16,8 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 public class ConfigServiceApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(ConfigServiceApplication.class, args);
+    }
+
+    @Value("${ssh_key}")
+    private String shsKey;
+
+    @PostConstruct
+    public void init() {
+        log.info("SSH_KEY: " + shsKey);
     }
 
     @PostMapping("/my-monitor")

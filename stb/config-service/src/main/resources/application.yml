@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: config-server
+    name: config-service
   cloud:
     bus:
       refresh:
@@ -12,7 +12,7 @@ spring:
       server:
         git:
           uri: git@github.com:ThenTrees/demo-config.git
-          private-key: ${SSH_KEY}
+          private-key: ${ssh_key}
           default-label: main
           force-pull: true
           clone-on-start: true
@@ -30,7 +30,3 @@ management:
   endpoint:
     health:
       show-details: always
-
-jasypt:
-  encryptor:
-    password: hello

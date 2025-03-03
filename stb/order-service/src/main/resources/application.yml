@@ -2,11 +2,28 @@ server:
   port: 9999
 
 spring:
+  profiles:
+    active: dev, mysql
+  security:
+    user:
+      name: admin
+      password: admin
   application:
     name: order-service
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://localhost:8888, vault://
   cloud:
     bus:
       enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+transit:
+  path: transit
+  key: order-service
+
 

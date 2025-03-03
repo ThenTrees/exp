@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 @Slf4j
-public class PerformanceMonitoring {
+public class PerformanceMonitoringAspect {
     @Pointcut("@annotation(com.thentrees.orderservice.utils.TracingTime)")
     public void tracingTime() {
     }
