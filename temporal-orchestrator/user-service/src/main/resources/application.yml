@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: payment-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+    include:
+      - database
+
+  config:
+    import: optional:configserver:http://localhost:8888
