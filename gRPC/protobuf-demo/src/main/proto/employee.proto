@@ -1,0 +1,47 @@
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+package com.thentrees.protobufdemo;
+option java_multiple_files=true;
+option java_package="com.thentrees.protobufdemo";
+
+message Employee {
+  int32 id=1;
+  string name=2;
+  double salary=3;
+  repeated Department departments=4;
+  map<string, string> addressMap=5;
+  bool isActive=6;
+  bytes profilePicture=7;
+  google.protobuf.Timestamp joinDate=8;
+}
+
+message Department {
+  int32 id=1;
+  string name=2;
+  repeated Employee employees=3;
+}
+
+message EmployeeList {
+  repeated Employee employee=1;
+}
+
+message Empty {
+
+}
+
+//message EmployeeRequest {
+//  int32 id=1;
+//
+//}
+
+service EmployeeService {
+  // get employee by id
+  rpc getEmployeeById(Employee) returns (Employee);
+
+  // add an employee
+  rpc addEmployee(Employee) returns (Employee);
+
+  //  get all the employee
+  rpc getAllEmployee(Empty) returns (EmployeeList);
+}
